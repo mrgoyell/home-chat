@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Body
 from pydantic import BaseModel
 
-from chat_gpt import get_response
+from core.chat_gpt import get_response
 
 app = FastAPI()
 
