@@ -26,3 +26,13 @@ async def chat(query: Message):
     message = query.message
     query.message = get_response(message)
     return query
+
+
+@app.post("/check_data")
+async def check_data(data: dict):
+    print(f"In check_data, Data: {data}")
+    query = data["queryResult"]["queryText"]
+    res = {
+        "fulfillmentText": get_response(query)
+    }
+    return res
