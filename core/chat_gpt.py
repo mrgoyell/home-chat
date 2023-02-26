@@ -2,7 +2,8 @@ import os
 import openai
 
 # secret = "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"
-secret = "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"
+# secret = "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"
+secret = "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"
 open_ai_key = "open_ai_key"
 os.environ[open_ai_key] = secret
 openai.api_key = os.environ[open_ai_key]
