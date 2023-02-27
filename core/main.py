@@ -20,19 +20,45 @@ class Message(BaseModel):
     message: str
 
 
+# Todo: put into separate classes different implementations for diagonflow and conversational
 @app.post("/chat")
-async def chat(query: Message):
+async def chat(data: dict):
+    """
+    for conversational in Actions on Google
+    https://workaholix.atlassian.net/browse/HC-8
+
+    :param data: json body received
+    :return:
+    """
+
     # print(query)
-    message = query.message
-    query.message = get_response(message)
-    return query
+    print(f"data in chat: {data}")
+    query = data["intent"]["query"]
+    message = get_response(query)
+    res = {
+        "candidates": [
+            {
+                "first_simple": {
+                    "variants": [
+                        {
+                            "speech": f"Test reply from Home chat backend for: {query}",
+                            "text": f"{message}"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+    return res
 
 
 @app.post("/check_data")
 async def check_data(data: dict):
     print(f"In check_data, Data: {data}")
     query = data["queryResult"]["queryText"]
+    res_message = get_response(query)
     res = {
-        "fulfillmentText": get_response(query)
+        "fulfillmentText": res_message
     }
+    print(f"Response msg: {res_message}")
     return res

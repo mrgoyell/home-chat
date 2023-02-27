@@ -1,0 +1,36 @@
+{
+  "handler": {
+    "name": "handler_name"
+  },
+  "intent": {
+    "name": "actions.intent.MAIN",
+    "params": {},
+    "query": ""
+  },
+  "scene": {
+    "name": "SceneName",
+    "slotFillingStatus": "UNSPECIFIED",
+    "slots": {}
+  },
+  "session": {
+    "id": "example_session_id",
+    "params": {},
+    "typeOverrides": []
+  },
+  "user": {
+    "locale": "en-US",
+    "params": {
+      "verificationStatus": "VERIFIED"
+    }
+  },
+  "home": {
+    "params": {}
+  },
+  "device": {
+    "capabilities": [
+      "SPEECH",
+      "RICH_RESPONSE",
+      "LONG_FORM_AUDIO"
+    ]
+  }
+}
