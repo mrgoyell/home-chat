@@ -33,22 +33,20 @@ async def chat(data: dict):
 
     # print(query)
     print(f"data in chat: {data}")
+    session = data["session"]
     query = data["intent"]["query"]
     message = get_response(query)
     res = {
-        "candidates": [
-            {
-                "first_simple": {
-                    "variants": [
-                        {
-                            "speech": f"Test reply from Home chat backend for: {query}",
-                            "text": f"{message}"
-                        }
-                    ]
-                }
+        "session": session,
+        "prompt": {
+            "override": False,
+            "firstSimple": {
+                "speech": f"Rishabh says, {message}",
+                "text": f"{message}"
             }
-        ]
+        }
     }
+    print(f"Returned message: {message}")
     return res
 
 
