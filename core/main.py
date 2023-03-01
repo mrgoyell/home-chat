@@ -22,20 +22,23 @@ class Message(BaseModel):
 
 # Todo: put into separate classes different implementations for diagonflow and conversational
 @app.post("/chat")
-async def chat(data: dict):
+async def chat(data: dict, tokens=2000):
     """
     for conversational in Actions on Google
     https://workaholix.atlassian.net/browse/HC-8
 
+    :param tokens:
     :param data: json body received
     :return:
     """
-
+    print(f"{tokens=}")
     # print(query)
-    print(f"data in chat: {data}")
+    # todo: check if tokens int
+    tokens = int(tokens)
+    print(f"{tokens=}, {data=}")
     session = data["session"]
     query = data["intent"]["query"]
-    message = get_response(query)
+    message = get_response(query, max_tokens=tokens)
     res = {
         "session": session,
         "prompt": {
@@ -52,6 +55,7 @@ async def chat(data: dict):
 
 @app.post("/check_data")
 async def check_data(data: dict):
+    # For Diagonflow
     print(f"In check_data, Data: {data}")
     query = data["queryResult"]["queryText"]
     res_message = get_response(query)
